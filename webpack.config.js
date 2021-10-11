@@ -1,6 +1,3 @@
-// import webpack from 'webpack'
-// import { supportedLocales } from './src/config'
-
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -13,10 +10,16 @@ module.exports = {
     devtool: 'inline-source-map',
     devServer: {
         static: path.resolve(__dirname, 'dist'),
-        port: 5001,
+        port: 5010,
         open: true,
         hot: true,
         liveReload: true,
+    },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].[contenthash].js',
+        assetModuleFilename: '[name][ext]',
+        clean: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -25,12 +28,6 @@ module.exports = {
             template: path.resolve(__dirname, 'src/index.html'),
         }),
     ],
-
-    output: {
-        filename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, 'dist'),
-        clean: true,
-    },
     module: {
         rules: [
             {
@@ -47,6 +44,17 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     outputPath: '../fonts',
+                },
+            },
+            // js for babel
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                    },
                 },
             },
         ],
