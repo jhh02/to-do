@@ -36,7 +36,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/i,
+                test: /(\.css)$/,
+                include: /node_modules/,
+                use: [MiniCssExtractPlugin.loader, { loader: 'css-loader' }],
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -46,14 +52,6 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                type: 'asset/resource',
-                loader: 'file-loader',
-                options: {
-                    outputPath: '../fonts',
-                },
             },
             // js for babel
             {
@@ -69,12 +67,3 @@ module.exports = {
         ],
     },
 };
-
-// export default function config {
-//     plugins: [
-//       new webpack.ContextReplacementPlugin(
-//         /date\-fns[\/\\]/,
-//         new RegExp(`[/\\\\\](${supportedLocales.join('|')})[/\\\\\]index\.js$`)
-//       )
-//     ]
-//   }

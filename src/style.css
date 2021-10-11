@@ -2,35 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-
-
-
-/* Custom CSS */
-
 :root {
-    font-size: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --text-primary: #b6b6b6;
-    --text-secondary: #ececec;
-    --bg-primary: #23232e;
-    --bg-secondary: #141418;
-    --transition-speed: 600ms;
+    @apply text-base font-roboto;
 }
 
 body {
-    color: black;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    @apply text-black bg-white m-0 p-0 box-border;
 }
 
 body::-webkit-scrollbar {
-    width: 0.25rem;
+    @apply w-1;
 }
 
 body::-webkit-scrollbar-track {
@@ -41,77 +22,52 @@ body::-webkit-scrollbar-track {
     background: #6649b8;
 }
 
-main {
-    margin-left: 5rem;
-    padding: 1rem;
+.searchbar {
+    @apply ml-20 p-4;
 }
 
 .navbar {
-    width: 5rem;
-    height: 100vh;
-    position: fixed;
-    background-color: var(--bg-primary);
-    transition: width 200ms ease;
-    overflow-x: auto;
+    @apply w-20 h-screen fixed bg-primary transition-width ease-ease duration-500 overflow-x-auto;
 }
 
 .nav-item {
-    width: 100%;
+    @apply w-full;
 }
 
 .nav-link {
-    display: flex;
-    align-items: center;
-    height: 5rem;
-    color: var(--text-primary);
-    text-decoration: none;
-    filter: grayscale(100%) opacity(0.7);
-    transition: var(--transition-speed);
+    @apply flex items-center h-20 text-text_primary no-underline filter grayscale opacity-70 transition duration-700;
 }
 
 .nav-link:hover {
-    filter: grayscale(0%) opacity(1);
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
+    @apply filter grayscale-0 opacity-100 bg-secondary text-text_secondary;
 }
 
 .link-text {
-    display: none;
-    margin-left: 1rem;
+    @apply hidden ml-4;
 }
 
 .nav-link svg {
-    min-width: 2rem;
-    margin: 0 1.5rem;
+    @apply mt-0 mb-0 ml-6 mr-6 min-w-1.5;
 }
 
 .svg-inline--fa {
-    color: #ff7eee;
+    @apply fill-current text-svg_color;
 }
 
 .svg-inline--fa {
-    transition: var(--trasition-speed);
+    @apply transition duration-700;
 }
 
 .logo {
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: var(--text-secondary);
-    background: var(--bg-secondary);
-    font-size: 1.5rem;
-    letter-spacing: 0.3ch;
-    width: 100%;
+    @apply font-bold uppercase mb-4 text-center text-secondary bg-secondary text-2xl w-full tracking-wide;
 }
 
 .logo svg {
-    transform: rotate(0deg);
-    transition: transform 1000ms;
+    @apply transform rotate-0 transition-transform duration-1000;
 }
 
 .navbar:hover .logo svg {
-    transform: rotate(-360deg);
+    @apply transform rotate-90;
 }
 
 /* Small Screens */
@@ -169,9 +125,5 @@ main {
     .navbar:hover .link-text {
         display: inline;
         transition: opacity var(--transition-speed);
-    }
-
-    .nav-item:last-child {
-        margin-top: auto;
     }
 }

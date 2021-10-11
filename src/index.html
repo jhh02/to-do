@@ -16,31 +16,31 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" data-name="inbox">
                             <i class="fas fa-inbox"></i>
                             <span class="link-text">Inbox</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" data-name="today">
                             <i class="fas fa-user-clock"></i>
                             <span class="link-text">Today</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" data-name="upcoming">
                             <i class="far fa-calendar"></i>
                             <span class="link-text">Upcoming</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" data-name="anytime">
                             <i class="fas fa-burn"></i>
                             <span class="link-text">Anytime</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" class="nav-link" data-name="trash">
                             <i class="far fa-trash-alt"></i>
                             <span class="link-text">Trash</span>
                         </a>
@@ -51,15 +51,18 @@
                             <span class="link-text">Large Project</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item mt-auto ">
+                        <a href="#" class="nav-link" data-name="new">
+                            <i class="fas fa-plus animate-bounce"></i>
                             <span class="link-text">New</span>
-                            <i class="fas fa-plus"></i>
                         </a>
                     </li>
                 </ul>
             </nav>
-            <main><%= htmlWebpackPlugin.options.title %></main>
+            <nav class="searchbar">
+                <i class="fas fa-search"></i>
+                <input type="text">
+            </nav>
         </div>
     </body>
 </html>
