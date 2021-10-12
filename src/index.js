@@ -17,11 +17,10 @@ hello.classList.add(
 
 wrapper.classList.add(
     'flex',
-    'w-full',
     'h-screen',
     'justify-center',
     'items-center'
 );
 
 wrapper.appendChild(hello);
-document.body.appendChild(wrapper);
+document.querySelector('#content').appendChild(wrapper);

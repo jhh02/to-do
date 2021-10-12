@@ -22,12 +22,23 @@ body::-webkit-scrollbar-track {
     background: #6649b8;
 }
 
+#content {
+    @apply flex;
+}
+
 .searchbar {
-    @apply ml-20 p-4;
+    @apply ml-20 p-4
+    sm:m-0;
+}
+
+.searchbar svg {
+    @apply border-gray-900
 }
 
 .navbar {
-    @apply w-20 h-screen fixed bg-primary transition-width ease-ease duration-500 overflow-x-auto;
+    @apply w-20 h-screen bg-primary transition-width ease-ease duration-700 overflow-hidden
+    sm:w-full sm:bottom-0 sm:h-20 sm:flex sm:justify-center
+    lg:w-20 lg:h-screen lg:hover:w-56;
 }
 
 .nav-item {
@@ -39,11 +50,12 @@ body::-webkit-scrollbar-track {
 }
 
 .nav-link:hover {
-    @apply filter grayscale-0 opacity-100 bg-secondary text-text_secondary;
+    @apply filter grayscale-0 opacity-100 bg-secondary text-text_secondary
+    sm:justify-center sm:align-middle;
 }
 
 .link-text {
-    @apply hidden ml-4;
+    @apply sm:hidden ml-4;
 }
 
 .nav-link svg {
@@ -59,71 +71,25 @@ body::-webkit-scrollbar-track {
 }
 
 .logo {
-    @apply font-bold uppercase mb-4 text-center text-secondary bg-secondary text-2xl w-full tracking-wide;
+    @apply font-bold uppercase mb-4 text-center text-secondary bg-secondary text-2xl w-full tracking-wide
+    sm:hidden;
 }
 
 .logo svg {
-    @apply transform rotate-0 transition-transform duration-1000;
+    @apply animate-ping
 }
 
-.navbar:hover .logo svg {
-    @apply transform rotate-90;
+.navbar .logo svg {
+    @apply hover:transform -rotate-45 
 }
 
-/* Small Screens */
-@media only screen and (max-width: 600px) {
-    .navbar {
-        bottom: 0;
-        width: 100%;
-        height: 5rem;
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .logo {
-        display: none;
-    }
-
-    .navbar-nav {
-        display: flex;
-        list-style: none;
-        align-items: center;
-    }
-
-    .nav-link {
-        justify-content: center;
-        align-items: center;
-    }
-
-    main {
-        margin: 0;
-    }
+.navbar-nav {
+    @apply sm:flex sm:list-none sm:align-middle lg:list-none lg:p-0 lg:m-0 lg:flex lg:flex-col lg:align-middle lg:h-screen;
 }
 
-/* Large Screens */
-@media only screen and (min-width: 600px) {
-    .navbar {
-        top: 0;
-        width: 5rem;
-        height: 100vh;
-    }
-
-    .navbar-nav {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .navbar:hover {
-        width: 16rem;
-    }
-
-    .navbar:hover .link-text {
-        display: inline;
-        transition: opacity var(--transition-speed);
-    }
+.navbar .link-text {
+    @apply lg:hover:inline lg:hover:transition-opacity duration-1000;
+}
+.nav-item:last-child {
+    @apply mt-auto
 }

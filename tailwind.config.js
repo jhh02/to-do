@@ -31,11 +31,12 @@ module.exports = {
                 '3/4': '75%',
                 full: '100%',
                 1.5: '1.5rem',
+                '14rem': '14rem',
             },
         },
+        variants: {
+            extend: {},
+        },
+        plugins: [],
     },
-    variants: {
-        extend: {},
-    },
-    plugins: [],
 };

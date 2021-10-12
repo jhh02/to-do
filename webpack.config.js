@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
 
 module.exports = {
     mode: 'development',
@@ -21,6 +22,17 @@ module.exports = {
         filename: '[name].[contenthash].js',
         assetModuleFilename: '[name][ext]',
         clean: true,
+    },
+    optimization: {
+        minimizer: [
+            new ESBuildMinifyPlugin({
+                test: /\.js(\?.*)?$/i,
+                parallel: true,
+                css: true,
+                target: 'esnext',
+                minify: true,
+            }),
+        ],
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -53,14 +65,13 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
-            // js for babel
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
+                    loader: 'esbuild-loader',
                     options: {
-                        presets: ['@babel/preset-env'],
+                        target: 'esnext',
                     },
                 },
             },
