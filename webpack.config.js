@@ -15,7 +15,6 @@ module.exports = {
         port: 5010,
         open: true,
         hot: true,
-        liveReload: true,
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

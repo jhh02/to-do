@@ -23,7 +23,7 @@ body::-webkit-scrollbar-track {
 }
 
 #content {
-    @apply flex;
+    @apply flex sm:block;
 }
 
 .searchbar {
@@ -32,17 +32,17 @@ body::-webkit-scrollbar-track {
 }
 
 .searchbar svg {
-    @apply border-gray-900
+    @apply border-gray-900;
 }
 
 .navbar {
     @apply w-20 h-screen bg-primary transition-width ease-ease duration-700 overflow-hidden
-    sm:w-full sm:bottom-0 sm:h-20 sm:flex sm:justify-center
+    sm:w-full sm:bottom-0 sm:h-20 sm:flex sm:justify-center sm:fixed
     lg:w-20 lg:h-screen lg:hover:w-56;
 }
 
 .nav-item {
-    @apply w-full;
+    @apply w-full lg:transition duration-300 ease-in transform hover:-translate-y-3 hover:scale-100;
 }
 
 .nav-link {
@@ -76,11 +76,7 @@ body::-webkit-scrollbar-track {
 }
 
 .logo svg {
-    @apply animate-ping
-}
-
-.navbar .logo svg {
-    @apply hover:transform -rotate-45 
+    @apply animate-inifinite-spin;
 }
 
 .navbar-nav {
@@ -90,6 +86,11 @@ body::-webkit-scrollbar-track {
 .navbar .link-text {
     @apply lg:hover:inline lg:hover:transition-opacity duration-1000;
 }
+
 .nav-item:last-child {
-    @apply mt-auto
+    @apply mt-auto transition duration-200 ease-in transform hover:-translate-y-3 hover:scale-100;
+}
+
+.nav-item:last-child a svg {
+    @apply transform hover:first:-rotate-45;
 }

@@ -33,9 +33,20 @@ module.exports = {
                 1.5: '1.5rem',
                 '14rem': '14rem',
             },
+            animation: {
+                'inifinite-spin': 'spin 10s linear infinite',
+            },
+            keyframes: {
+                spin: {
+                    from: { transform: 'rotate(0deg)' },
+                    to: { transform: 'rotate(360deg)' },
+                },
+            },
         },
         variants: {
-            extend: {},
+            extend: {
+                borderWidth: ['first'],
+            },
         },
         plugins: [],
     },

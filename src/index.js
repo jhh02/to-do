@@ -15,12 +15,7 @@ hello.classList.add(
     'font-extrabold'
 );
 
-wrapper.classList.add(
-    'flex',
-    'h-screen',
-    'justify-center',
-    'items-center'
-);
+wrapper.classList.add('flex', 'h-screen', 'justify-center', 'items-center');
 
 wrapper.appendChild(hello);
 document.querySelector('#content').appendChild(wrapper);
