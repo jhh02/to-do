@@ -1,7 +1,5 @@
 node_modules
 .eslintrc.json
 .prettierrc
-tailwind-default.config.js
-.eslintrc.json
-package-lock.json
+.vscode
 tailwind-default.config.js

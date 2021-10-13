@@ -9,7 +9,6 @@ module.exports = {
                 secondary: '#141418',
                 text_primary: '#b6b6b6',
                 text_secondary: '#ececec',
-                svg_color: '#ff7eee',
             },
             screens: {
                 sm: { max: '600px' },
@@ -24,30 +23,8 @@ module.exports = {
             fontFamily: {
                 roboto: ['Roboto', 'Open Sans', 'Noto San JP', 'Lato'],
             },
-            minWidth: {
-                0: '0',
-                '1/4': '25%',
-                '1/2': '50%',
-                '3/4': '75%',
-                full: '100%',
-                1.5: '1.5rem',
-                '14rem': '14rem',
-            },
-            animation: {
-                'inifinite-spin': 'spin 10s linear infinite',
-            },
-            keyframes: {
-                spin: {
-                    from: { transform: 'rotate(0deg)' },
-                    to: { transform: 'rotate(360deg)' },
-                },
-            },
         },
-        variants: {
-            extend: {
-                borderWidth: ['first'],
-            },
-        },
+        variants: {},
         plugins: [],
     },
 };
