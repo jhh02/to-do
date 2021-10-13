@@ -7,7 +7,7 @@
 }
 
 body {
-    @apply text-black bg-white m-0 p-0 box-border;
+    @apply text-black m-0 p-0 box-border;
 }
 
 body::-webkit-scrollbar {
@@ -24,15 +24,6 @@ body::-webkit-scrollbar-track {
 
 #content {
     @apply flex sm:block;
-}
-
-.searchbar {
-    @apply ml-20 p-4
-    sm:m-0;
-}
-
-.searchbar svg {
-    @apply border-gray-900;
 }
 
 .navbar {
@@ -55,28 +46,19 @@ body::-webkit-scrollbar-track {
 }
 
 .link-text {
-    @apply sm:hidden ml-4;
+    @apply sm:hidden ml-4 select-none;
 }
 
 .nav-link svg {
-    @apply mt-0 mb-0 ml-6 mr-6 min-w-1.5;
+    @apply mt-0 mb-0 ml-6 mr-6 min-w-[1.5rem] lg:select-none;
 }
 
 .svg-inline--fa {
-    @apply fill-current text-svg_color;
+    @apply fill-current text-[#ff7eee];
 }
 
 .svg-inline--fa {
     @apply transition duration-700;
-}
-
-.logo {
-    @apply font-bold uppercase mb-4 text-center text-secondary bg-secondary text-2xl w-full tracking-wide
-    sm:hidden;
-}
-
-.logo svg {
-    @apply animate-inifinite-spin;
 }
 
 .navbar-nav {
@@ -93,4 +75,20 @@ body::-webkit-scrollbar-track {
 
 .nav-item:last-child a svg {
     @apply transform hover:first:-rotate-45;
+}
+
+
+
+input[type='text'] {
+    @apply rounded-lg border-none pl-4 text-primary overscroll-none 
+    focus-visible:outline-none;
+}
+
+
+.section {
+    display: none;
+}
+
+.viewing {
+    display: block;
 }

@@ -12,7 +12,10 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 function loadFonts() {
     library.add(fas, far, fab);
     dom.i2svg();
-    dom.watch();
+    dom.watch({
+        autoReplaceSvgRoot: document,
+        observeMutationsRoot: document.body,
+    });
 }
 
 export default loadFonts;
