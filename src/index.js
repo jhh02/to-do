@@ -10,3 +10,4 @@ import clickAddTaskBtn from './DOM/clickAddTask';
     createNavigationEvent();
     clickAddTaskBtn();
 })();
+
