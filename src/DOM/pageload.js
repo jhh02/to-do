@@ -19,10 +19,10 @@ function loadPage() {
     const mainContents = createContentsHeading();
 
     // Create content main page
-    createContents();
+    createContents(mainContents);
 
     // Adding contents to wrapper
-    mainContents.forEach((content) => wrapper.appendChild(content));
+    mainContents.forEach((content) => wrapper.appendChild(content.el));
 
     // Create Navigation item holder
     const navigationItemHolder = makeNavigationHolder(navigationBar);
