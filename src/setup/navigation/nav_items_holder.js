@@ -1,7 +1,8 @@
-export default function makeNavigationHolder(navigationBar) {
-    const navigationItemHolder = document.createElement('ul');
-    navigationItemHolder.classList.add('navbar-nav');
-    navigationBar.appendChild(navigationItemHolder);
+import createElement from '../../DOM/createElement';
 
-    return navigationItemHolder;
+export default function makeNavigationHolder(navigationBar) {
+    const navigationItemHolder = createElement('ul', 'navbar-nav');
+    navigationBar.appendChild(navigationItemHolder.el);
+
+    return navigationItemHolder.el;
 }

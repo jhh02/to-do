@@ -1,8 +1,8 @@
+import createElement from '../../DOM/createElement';
+
 export default function makeNavigation(wrapper) {
     // Create Navvigation bar
-    const navigationBar = document.createElement('nav');
-    navigationBar.classList.add('navbar');
-    wrapper.appendChild(navigationBar);
-
-    return navigationBar;
+    const navigationBar = createElement('nav', 'navbar');
+    wrapper.appendChild(navigationBar.el);
+    return navigationBar.el;
 }

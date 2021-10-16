@@ -1,20 +1,11 @@
+import createElement from '../../DOM/createElement';
+
 export default function createContentsHeading() {
     // Create Content page
-    const inbox = document.createElement('div');
-    const today = document.createElement('div');
-    const upcoming = document.createElement('div');
-    const project = document.createElement('div');
+    const inbox = createElement('div', 'section', 'inbox', 'viewing');
+    const today = createElement('div', 'section', 'today');
+    const upcoming = createElement('div', 'section', 'upcoming');
+    const project = createElement('div', 'section', 'project');
 
-    inbox.classList.add('section');
-    inbox.classList.add('inbox');
-    inbox.classList.add('viewing');
-    today.classList.add('section');
-    today.classList.add('today');
-    upcoming.classList.add('section');
-    upcoming.classList.add('upcoming');
-    project.classList.add('section');
-    project.classList.add('project');
-
-    const contents = [inbox, today, upcoming, project];
-    return contents;
+    return [inbox, today, upcoming, project];
 }

@@ -1,39 +1,43 @@
-import createContentsHeading from './content_heading';
+import createElement from '../../DOM/createElement';
 
-export default function createContentPage() {
-    for (let i = 0; i < createContentsHeading.length; i += 1) {
-        const headingContainer = document.createElement('div');
-        const heading = document.createElement('h1');
-        const dueDate = document.createElement('div');
-        const dueDateArrowDown = document.createElement('i');
-        heading.textContent = `${createContentsHeading[i].classList[1].replace(
-            createContentsHeading[i].classList[1][0],
-            createContentsHeading[i].classList[1][0].toUpperCase()
-        )}`;
-        dueDate.textContent = 'Due Date';
-        headingContainer.classList.add('heading');
-        dueDateArrowDown.classList.add('fas');
-        dueDateArrowDown.classList.add('fa-angle-down');
-        dueDate.appendChild(dueDateArrowDown);
-        headingContainer.appendChild(heading);
-        headingContainer.appendChild(dueDate);
-
-        const ul = document.createElement('ul');
-        const addTask = document.createElement('li');
-        const addTaskIcon = document.createElement('i');
-        const addTaskText = document.createElement('p');
-        addTaskIcon.classList.add('fas');
-        addTaskIcon.classList.add('fa-plus-circle');
-        addTaskText.textContent = 'Add Task';
-        ul.classList.add(
-            `${createContentsHeading[i].createContentsHeading[1]}List`
+export default function createContentPage(mainContents) {
+    for (let i = 0; i < mainContents.length; i += 1) {
+        const headingContainer = createElement('div', 'heading');
+        const heading = createElement(
+            'h1',
+            `${mainContents[i].className[1]}-heading`
         );
-        addTask.classList.add('addToTask');
-        addTask.appendChild(addTaskIcon);
-        addTask.appendChild(addTaskText);
-        ul.appendChild(addTask);
+        const dueDate = createElement(
+            'div',
+            `${mainContents[i].className[1]}-date`
+        );
 
-        createContentsHeading[i].appendChild(headingContainer);
-        createContentsHeading[i].appendChild(ul);
+        heading.el.textContent = `${mainContents[i].className[1].replace(
+            mainContents[i].className[1][0],
+            mainContents[i].className[1][0].toUpperCase()
+        )}`;
+        dueDate.el.textContent = 'Due Date';
+
+        const arrowUp = createElement('span', 'arrowup', 'hidden');
+        const arrowDown = createElement('span', 'arrowdown');
+        arrowUp.el.textContent = '▲';
+        arrowDown.el.textContent = '▼';
+        dueDate.el.appendChild(arrowDown.el);
+        dueDate.el.appendChild(arrowUp.el);
+
+        headingContainer.el.appendChild(heading.el);
+        headingContainer.el.appendChild(dueDate.el);
+
+        const ul = createElement('ul', `${mainContents[i].className[1]}List`);
+        const addTask = createElement('li', 'addToTask');
+        const addTaskIcon = createElement('i', 'fas', 'fa-plus-circle');
+        const addTaskText = createElement('p');
+        addTaskText.el.textContent = 'Add Task';
+        addTask.el.appendChild(addTaskIcon.el);
+        addTask.el.appendChild(addTaskText.el);
+        ul.el.appendChild(addTask.el);
+
+        mainContents[i].el.appendChild(headingContainer.el);
+        mainContents[i].el.appendChild(ul.el);
     }
 }
