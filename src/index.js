@@ -12,3 +12,4 @@ import sortDueDate from './event/dateSort';
     clickAddTaskBtn();
     sortDueDate();
 })();
+

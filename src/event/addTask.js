@@ -59,7 +59,6 @@ export default function clickAddTaskBtn() {
         showTodoBox(todoBox);
         // document.querySelector('.inboxList').appendChild(todoBox);
     }
-    
+
     addTask.addEventListener('click', addToDo);
-  
 }
