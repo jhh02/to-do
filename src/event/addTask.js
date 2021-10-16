@@ -1,64 +1,107 @@
+import { toDoObjectsArray } from '../arrays';
 import createElement from '../DOM/createElement';
 
 export default function clickAddTaskBtn() {
-    const addTask = document.querySelector('.addToTask');
+    const addTaskBtns = document.querySelectorAll('.addToTask');
+    const uls = document.querySelectorAll('.toDoUl');
 
     function createToDoBox() {
         // Create ToDo Element
-        const toDoList = createElement('li');
-        const toDoForm = createElement('form');
-        const headingCheckbox = createElement('input');
-        const heading = createElement('input');
-        const notes = createElement('textarea');
-        const btnContainer = createElement('div');
-        const dateBtn = createElement('i', 'fa', 'fa-calendar');
-        const tagBtn = createElement('i', 'fas', 'fa-tag');
-        const checklistBtn = createElement('i', 'fas', 'fa-tasks');
-        const priority = createElement('i', 'far', 'fa-flag');
+        const toDoList = createElement('li', 'toDoList');
+        const toDoForm = createElement('form', 'toDoForm');
+        const headingContainer = createElement('div', 'headingContainer');
+        const headingCheckbox = createElement('input', 'checkbox');
+        const heading = createElement('input', 'heading');
+        const notes = createElement('textarea', 'textarea');
+        const btnContainer = createElement('div', 'btnContainer');
+        const dateBtn = createElement('p', 'dateBtn', 'toDoBtn');
+        const tagBtn = createElement('label', 'tagBtn', 'toDoBtn');
+        const checklistBtn = createElement('p', 'checklistBtn', 'toDoBtn');
+        const priorityBtn = createElement('p', 'priorityBtn', 'toDoBtn');
+        dateBtn.el.textContent = '📅';
+        tagBtn.el.innerHTML = '🏷';
+        checklistBtn.el.innerHTML = '✔️';
+        priorityBtn.el.innerHTML = '🚩';
         headingCheckbox.el.type = 'checkbox';
         heading.el.placeholder = 'New To-Do';
         notes.el.placeholder = 'Notes';
 
-        // Date event handlers
-
-        // Tag event handlers
-
-        // Checklist event handlers
-
-        // Priority event handlers
-
-        toDoForm.el.appendChild(headingCheckbox.el);
-        toDoForm.el.appendChild(heading.el);
+        headingContainer.el.appendChild(headingCheckbox.el);
+        headingContainer.el.appendChild(heading.el);
+        toDoForm.el.appendChild(headingContainer.el);
         toDoForm.el.appendChild(notes.el);
         btnContainer.el.appendChild(dateBtn.el);
         btnContainer.el.appendChild(tagBtn.el);
         btnContainer.el.appendChild(checklistBtn.el);
-        btnContainer.el.appendChild(priority.el);
+        btnContainer.el.appendChild(priorityBtn.el);
         toDoForm.el.appendChild(btnContainer.el);
         toDoList.el.append(toDoForm.el);
 
         return toDoList;
     }
 
-    function showTodoBox(todo) {
-        document.querySelector('.inboxList').appendChild(todo.el);
+    function showTodoBox(e, todo) {
+        uls.forEach((ul) => {
+            if (ul.classList[0] === e.target.parentElement.classList[0]) {
+                ul.appendChild(todo.el);
+            }
+        });
     }
 
-    function hideTaskBar() {
-        const addToTask = document.querySelector('.addToTask');
-        addToTask.style.display = 'none';
+    function hideTaskBar(e) {
+        const addToTasks = document.querySelectorAll('.addToTask');
+        addToTasks.forEach((addToTask) => {
+            if (
+                addToTask.parentElement.classList[0] ===
+                e.target.parentElement.classList[0]
+            ) {
+                addToTask.style.display = 'none';
+            }
+        });
+    }
+
+    function addEventsToTodobox(todoBox) {
+        const dateBtn = todoBox.querySelector('.dateBtn');
+        const tagBtn = todoBox.querySelector('.tagBtn');
+        const checklistBtn = todoBox.querySelector('.checklistBtn');
+        const priorityBtn = todoBox.querySelector('.priorityBtn');
+
+        //  Date event handlers
+        dateBtn.addEventListener('click', (e) => {
+            const dateElement = e.target;
+            const dateInput = document.createElement('input');
+            dateInput.type = 'date';
+            dateElement.parentNode.insertBefore(dateInput, dateElement);
+            dateElement.classList.add('hidden');
+            console.log(dateInput.value);
+            // 3.
+        });
+
+        // Tag event handlers
+        tagBtn.addEventListener('click', (e) => {
+            const tagElement = e.target;
+            const tagInput = document.createElement('input');
+            const tagDataList = document.createElement('datalist');
+            tagInput.id = 'tags';
+            tagInput.name = 'tags';
+            tagDataList.id = 'tags';
+            tagElement.parentNode.insertBefore(tagInput, tagElement);
+            tagElement.parentNode.insertBefore(tagDataList, tagInput);
+        });
     }
 
     function addToDo(e) {
         // 1. Hide taskbar
-        hideTaskBar();
+        hideTaskBar(e);
         // 2. Create To Do List box
-        // 3. Show To Do list box
         const todoBox = createToDoBox();
+        // 3. Show To Do list box
+        showTodoBox(e, todoBox);
+        addEventsToTodobox(todoBox.el);
         // 4.
-        showTodoBox(todoBox);
-        // document.querySelector('.inboxList').appendChild(todoBox);
     }
 
-    addTask.addEventListener('click', addToDo);
+    addTaskBtns.forEach((addTaskBtn) => {
+        addTaskBtn.addEventListener('click', addToDo);
+    });
 }

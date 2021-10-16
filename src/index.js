@@ -4,12 +4,11 @@ import loadFonts from './fonts';
 import loadPage from './DOM/pageload';
 import createNavigationEvent from './event/navigationItem';
 import clickAddTaskBtn from './event/addTask';
-import sortDueDate from './event/dateSort';
+import sortDate from './event/sortDate';
 
 (function init() {
     loadPage();
     createNavigationEvent();
     clickAddTaskBtn();
-    sortDueDate();
+    sortDate();
 })();
-

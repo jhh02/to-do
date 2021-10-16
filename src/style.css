@@ -54,11 +54,8 @@ body::-webkit-scrollbar-track {
 }
 
 .svg-inline--fa {
-    @apply fill-current text-[#ff7eee];
-}
-
-.svg-inline--fa {
-    @apply transition duration-700;
+    @apply fill-current text-[#ff7eee] transition duration-700;
+    pointer-events: none;
 }
 
 .navbar-nav {
@@ -99,17 +96,51 @@ input[type='text'] {
 }
 
 .heading {
-    @apply flex w-3/5 justify-between
+    @apply flex w-3/5 justify-between;
 }
 
 .heading div {
-    @apply flex gap-4 items-center cursor-pointer
+    @apply flex gap-4 items-center cursor-pointer;
 }
 
 .section ul {
-    @apply w-3/5 flex 
-
+    @apply w-3/5 flex;
 }
-.section ul li{
-    @apply flex items-center w-full justify-start gap-4 cursor-pointer
+.section ul li {
+    @apply flex items-center w-full justify-start gap-4 cursor-pointer;
+}
+
+.headingContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.toDoForm {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    gap: 1rem;
+}
+
+.addTaskText {
+    pointer-events: none;
+}
+
+.arrow {
+    pointer-events: none;
+}
+
+.toDoBtn {
+    cursor: pointer;
+}
+
+.toDoForm {
+    cursor: default;
 }
