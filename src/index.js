@@ -1,14 +1,15 @@
 import { format, compareAsc } from 'date-fns';
 import style from './style.css';
 import loadFonts from './fonts';
-import loadPage from './DOM/pageload';
-import createNavigationEvent from './event/navigationItem';
-import clickAddTaskBtn from './event/addTask';
+import createNavigationEvent from './event/navigationBar';
+import createToDo from './event/addTask';
 import sortDate from './event/sortDate';
+import loginUser from './event/loginUser';
 
 (function init() {
-    loadPage();
+    // loadPage();
     createNavigationEvent();
-    clickAddTaskBtn();
+    loginUser();
+    createToDo();
     sortDate();
 })();
