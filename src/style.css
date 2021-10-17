@@ -24,12 +24,14 @@ body::-webkit-scrollbar-track {
 
 #content {
     @apply flex sm:block;
+    justify-content: initial;
 }
 
 .navbar {
     @apply w-20 h-screen bg-primary transition-width ease-ease duration-700 overflow-hidden
     sm:w-full sm:bottom-0 sm:h-20 sm:flex sm:justify-center sm:fixed
     lg:w-20 lg:h-screen lg:hover:w-56;
+    pointer-events: none;
 }
 
 .nav-item {
@@ -79,41 +81,51 @@ input[type='text'] {
     focus-visible:outline-none;
 }
 
-.section {
-    display: none;
-}
-
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-.viewing {
+.main {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: column;
     width: 100%;
+    gap: 1rem;
 }
 
+.hidden-content {
+    display: none;
+}
 .heading {
     @apply flex w-3/5 justify-between;
 }
 
-.heading div {
-    @apply flex gap-4 items-center cursor-pointer;
-}
-
-.section ul {
-    @apply w-3/5 flex;
-}
-.section ul li {
-    @apply flex items-center w-full justify-start gap-4 cursor-pointer;
-}
-
 .headingContainer {
+    @apply flex gap-4 cursor-pointer;
+    width: 60%;
+    justify-content: space-between;
+}
+
+.contentDate {
+    display: flex;
+    gap: 1rem;
+}
+.toDoListContainer {
+    @apply  flex;
+    justify-content: center;
+    width: 75%
+}
+.addToTaskBar {
+    @apply flex items-center justify-start gap-4 cursor-pointer;
+    width: 80%;
+}
+
+.headingContainers {
     display: flex;
     align-items: center;
     gap: 1rem;
+    width: 80%;
 }
 
 .btnContainer {
@@ -122,14 +134,7 @@ input[type='text'] {
     gap: 1rem;
 }
 
-.toDoForm {
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-    gap: 1rem;
-}
-
-.addTaskText {
+.addToTaskText {
     pointer-events: none;
 }
 
@@ -143,4 +148,61 @@ input[type='text'] {
 
 .toDoForm {
     cursor: default;
+}
+
+.cancelBtn {
+    margin-right: auto;
+}
+
+.toDoList {
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+    width: 60%;
+    margin-top: 30px;
+    gap: 1rem;
+}
+.userLogin {
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+    gap: 3rem;
+}
+
+.askName {
+    font-size: 4rem;
+}
+
+.userName {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.welcomeUser {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    font-size: 4rem;
+    gap: 4rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.clicked {
+    position: absolute;
+    top: 20px;
+    font-size: 1rem;
+    gap: 1rem;
+    align-items: center;
+    width: 100px;
+    left: 50%;
+}
+
+.calendar-date {
+    width: 150px;
+    border: none;
+    outline: none;
 }

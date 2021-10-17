@@ -5,5 +5,121 @@
         <title><%= htmlWebpackPlugin.options.title %></title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
-    <body></body>
+    <body>
+        <div id="content">
+            <nav class="navbar">
+                <ul class="nav-bar">
+                    <li class="user">
+                        <a href="#" class="nav-link user-list">
+                            <i class="far fa-star"></i>
+                            <span class="link-text user-text"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link inbox">
+                            <i class="fas fa-inbox"></i>
+                            <span class="link-text">Inbox</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link today">
+                            <i class="fas fa-user-clock"></i>
+                            <span class="link-text">Today</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link upcoming">
+                            <i class="far fa-calendar"></i>
+                            <span class="link-text">Upcoming</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link project">
+                            <i
+                                class="fas fa-project-diagram"
+                                data-name="project"
+                            ></i>
+                            <span class="link-text">Project</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="userLogin">
+                <div class="askName">What is your first name?</div>
+                <div class="userInput">
+                    <input
+                        class="userName"
+                        type="text"
+                        required
+                        placeholder="Enter your name"
+                    />
+                </div>
+            </div>
+            <div class="welcomeUser hidden"></div>
+            <div class="inbox-content main hidden-content">
+                <div class="headingContainer">
+                    <div class="contentHeading">Inbox</div>
+                    <div class="contentDate">
+                        <div class="dueDateText">Due Date</div>
+                        <span class="arrow arrowUp hidden">▲</span
+                        ><span class="arrow arrowDown">▼</span>
+                    </div>
+                </div>
+                <ul class="toDoListContainer">
+                    <li class="addToTaskBar">
+                        <i class="fas fa-plus-circle"></i>
+                        <div class="addToTaskText">Add To Task</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="today-content main hidden-content">
+                <div class="headingContainer">
+                    <div class="contentHeading">Today</div>
+                    <div class="contentDate">
+                        <div class="dueDateText">Due Date</div>
+                        <span class="arrow arrowUp hidden">▲</span
+                        ><span class="arrow arrowDown">▼</span>
+                    </div>
+                </div>
+                <ul class="toDoListContainer">
+                    <li class="addToTaskBar">
+                        <i class="fas fa-plus-circle"></i>
+                        <div class="addToTaskText">Add To Task</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="upcoming-content main hidden-content">
+                <div class="headingContainer">
+                    <div class="contentHeading">Upcoming</div>
+                    <div class="contentDate">
+                        <div class="dueDateText">Due Date</div>
+                        <span class="arrow arrowUp hidden">▲</span
+                        ><span class="arrow arrowDown">▼</span>
+                    </div>
+                </div>
+                <ul class="toDoListContainer">
+                    <li class="addToTaskBar">
+                        <i class="fas fa-plus-circle"></i>
+                        <div class="addToTaskText">Add To Task</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="project-content main hidden-content">
+                <div class="headingContainer">
+                    <div class="contentHeading">Project</div>
+                    <div class="contentDate">
+                        <div class="dueDateText">Due Date</div>
+                        <span class="arrow arrowUp hidden">▲</span
+                        ><span class="arrow arrowDown">▼</span>
+                    </div>
+                </div>
+                <ul class="toDoListContainer">
+                    <li class="addToTaskBar">
+                        <i class="fas fa-plus-circle"></i>
+                        <div class="addToTaskText">Add To Task</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
 </html>

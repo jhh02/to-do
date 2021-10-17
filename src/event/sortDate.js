@@ -1,16 +1,14 @@
 export default function sortDueDate() {
-    const dueDateBtns = document.querySelectorAll('.dates');
-    const arrowUps = document.querySelectorAll('.arrowup');
-    const arrowDowns = document.querySelectorAll('.arrowdown');
+    const dueDateBtns = document.querySelectorAll('.dueDateText');
+    const arrowUps = document.querySelectorAll('.arrowUp');
+    const arrowDowns = document.querySelectorAll('.arrowDown');
 
     dueDateBtns.forEach((dueDateBtn) => {
         dueDateBtn.addEventListener('click', (e) => {
             for (let i = 0; i < arrowDowns.length; i += 1) {
                 if (
-                    dueDateBtn.classList[0] ===
-                        arrowDowns[i].parentElement.classList[0] &&
-                    dueDateBtn.classList[0] ===
-                        arrowUps[i].parentElement.classList[0]
+                    dueDateBtn.parentElement === arrowDowns[i].parentElement &&
+                    dueDateBtn.parentElement === arrowUps[i].parentElement
                 ) {
                     arrowUps[i].classList.toggle('hidden');
                     arrowDowns[i].classList.toggle('hidden');
