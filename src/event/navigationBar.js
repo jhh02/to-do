@@ -8,10 +8,8 @@ function createNavigationEvent() {
         if (userMessages.classList.contains('clicked'))
             userMessages.classList.remove('clicked');
     });
-    console.log(navigationItems);
     navigationItems.forEach((item) => {
         item.addEventListener('click', (e) => {
-            console.log(item, e.target);
             userMessages.classList.add('clicked');
             sections.forEach((content) => {
                 if (

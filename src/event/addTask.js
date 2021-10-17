@@ -6,7 +6,7 @@ export default function clickAddTaskBtn() {
     const uls = document.querySelectorAll('.toDoListContainer');
 
     function createToDoBox() {
-        // Create ToDo Element
+        //* Create To Do Element
         const toDoList = createElement('li', 'toDoList');
         const headingContainer = createElement('div', 'headingContainers');
         const headingCheckbox = createElement('input', 'checkbox');
@@ -62,6 +62,8 @@ export default function clickAddTaskBtn() {
     }
 
     function addEventsToTodobox(todoBox) {
+        const headingContainer = todoBox.querySelector('.headingContainers');
+        const btnContainer = todoBox.querySelector('btnContainer');
         const toDoTitle = todoBox.querySelector('.heading');
         const notesArea = todoBox.querySelector('.textarea');
         const dateBtn = todoBox.querySelector('.dateBtn');
@@ -71,47 +73,67 @@ export default function clickAddTaskBtn() {
         const okBtn = todoBox.querySelector('.okBtn');
         const cancelBtn = todoBox.querySelector('.cancelBtn');
 
-        // Heading event handlers
+        // * Heading event handlers for user input
         toDoTitle.addEventListener('keypress', (toDoTitleEvent) => {
             if (toDoTitleEvent.key === 'Enter') {
                 const headingValue = toDoTitle.value;
                 toDoTitle.value = '';
+                const toDoHeadginValue = createElement(
+                    'span',
+                    'toDoTitleValue'
+                );
 
-                // Hide input element
-                // Make span element and insert it where input element was
+                // * Heading double click event for ediiting
+                toDoHeadginValue.el.addEventListener(
+                    'dblclick',
+                    (dbclickEvent) => {
+                        console.log(headingValue, dbclickEvent.target);
+                        dbclickEvent.target.previousSibling.value =
+                            headingValue;
+                        dbclickEvent.target.previousSibling.classList.remove(
+                            'hidden'
+                        );
+                        dbclickEvent.target.remove();
+                    }
+                );
+
+                toDoHeadginValue.el.textContent = headingValue;
+                toDoTitleEvent.target.parentElement.appendChild(
+                    toDoHeadginValue.el
+                );
+                toDoTitle.classList.add('hidden');
             }
         });
 
-        // Heading mouseover event
-        // When mouse over span element
-        // hide span
-        // show input element with title value
-
-        // Heading mouseout event
-        // When mouse is out
-        // hide innput element
-        // show span
-
-        // Textarea event handlers
+        // * Textarea event handlers for user input
         notesArea.addEventListener('keypress', (textareaEvent) => {
             if (textareaEvent.key === 'Enter') {
-                const noteValue = notesArea.value;
+                const notesValue = notesArea.value;
                 notesArea.value = '';
-                console.log(noteValue);
+                const toDoNotesValue = createElement('p', 'toDoNotesValue');
+
+                // * Textarea double click event for ediiting
+                toDoNotesValue.el.addEventListener(
+                    'dblclick',
+                    (dbclickEvent) => {
+                        dbclickEvent.target.nextSibling.value = notesValue;
+                        dbclickEvent.target.nextSibling.classList.remove(
+                            'hidden'
+                        );
+                        dbclickEvent.target.remove();
+                    }
+                );
+
+                toDoNotesValue.el.textContent = notesValue;
+                textareaEvent.target.parentElement.insertBefore(
+                    toDoNotesValue.el,
+                    notesArea
+                );
+                notesArea.classList.add('hidden');
             }
         });
 
-        // Heading mouseover event
-        // When mouse over span element
-        // hide span
-        // show show text with text value
-
-        // Heading mouseout event
-        // When mouse is out
-        // hide text  element
-        // show span
-
-        //  Date event handlers
+        //* Date event handlers
         dateBtn.addEventListener('click', (e) => {
             const dateElement = e.target;
             const dateInput = createElement('input', 'calendar-date');
@@ -119,10 +141,10 @@ export default function clickAddTaskBtn() {
             dateElement.parentNode.insertBefore(dateInput.el, dateElement);
             dateElement.classList.add('hidden');
 
-            // 3.
+            // TODO Get date values using date-fns
         });
 
-        // Tag event handlers
+        //* Tag event handlers
         tagBtn.addEventListener('click', (e) => {
             // Check if tag array is empty
             // if empty then
@@ -138,7 +160,7 @@ export default function clickAddTaskBtn() {
             // save it on todoObject.tag
         });
 
-        // Checklist event handlers
+        //* Checklist event handlers
         checklistBtn.addEventListener('click', (checklistEvent) => {
             const checkLists = createElement('ul', 'checkBoxChecklist');
             const checkListContainer = createElement(
@@ -199,11 +221,11 @@ export default function clickAddTaskBtn() {
         // create delete button event handlers
         // 1. delete the element from checklist
 
-        // Priority event handlers
+        //* Priority event handlers
         // 1. create drop down menu
         // 2. create 4 options buttons with value
 
-        // Confirm event handlers
+        //* Confirm event handlers
         // 1. Save title value, textAreaValue,due date, priority, tags, checklists, checkbox, give id
         //  - create an todoObject and push to todoObject array
         // 2. give todo box an id. maybe random number
@@ -215,7 +237,7 @@ export default function clickAddTaskBtn() {
         // check if date is empty
         // check if priority is selected
 
-        // Create li
+        //* Create li
         // create container for checkbox and title
         // create input for checkbox
         // create div for title
@@ -226,7 +248,7 @@ export default function clickAddTaskBtn() {
         // create button for delete
         // insert list before add task bar
 
-        // Cancel event handlers
+        //* Cancel event handlers
         cancelBtn.addEventListener('click', (e) => {
             todoBox.remove();
             addTaskBtns.forEach((taskBtn) =>
@@ -244,6 +266,7 @@ export default function clickAddTaskBtn() {
         showTodoBox(e, todoBox);
         // 4. add etodo box event
         addEventsToTodobox(todoBox.el);
+
         // 5. Create lists on ul
         // 6. Show list on ul
         // 7. Push todo Object to todoobj arrays
