@@ -1,4 +1,4 @@
-import createElement from '../DOM/createElement';
+import { createElement, appendChild } from '../DOM/functions';
 
 export default function userLogin() {
     const sections = document.querySelectorAll('.main');
@@ -29,11 +29,10 @@ export default function userLogin() {
             const welcomeMessage = createElement('h1', 'welcomeMessage');
             welcomeMessage.el.textContent = `Welcome ${userName}`;
             welcomeUser.classList.remove('hidden');
-            welcomeUser.appendChild(welcomeMessage.el);
+            const clock = createElement('span', 'clock');
+            appendChild(welcomeUser, welcomeMessage.el, clock.el);
 
             // 2. Show live clock
-            const clock = createElement('span', 'clock');
-            welcomeUser.appendChild(clock.el);
             setInterval(() => {
                 const date = new Date();
                 const hours = date.getHours();
@@ -59,10 +58,9 @@ export default function userLogin() {
         const user = localStorage.getItem('userName');
         const welcomeMessage = createElement('div', 'welcomeMessage');
         welcomeMessage.el.textContent = `Welcome ${user}`;
-        welcomeUser.appendChild(welcomeMessage.el);
-
         const clock = createElement('span', 'clock');
-        welcomeUser.appendChild(clock.el);
+        appendChild(welcomeUser, welcomeMessage.el, clock.el);
+
         setInterval(() => {
             const date = new Date();
             const hours = date.getHours();

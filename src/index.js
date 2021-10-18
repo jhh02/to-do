@@ -1,4 +1,3 @@
-import { format, compareAsc } from 'date-fns';
 import style from './style.css';
 import loadFonts from './fonts';
 import createNavigationEvent from './event/navigationBar';

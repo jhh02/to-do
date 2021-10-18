@@ -201,7 +201,7 @@ input[type='text'] {
     left: 50%;
 }
 
-.calendar-date {
+.dateBtn {
     width: 150px;
     border: none;
     outline: none;
