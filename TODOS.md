@@ -1,10 +1,36 @@
-1. Make ToDoBox
-2. Implement every button logic 
-3. To do title 
-4. To do text area
-5. Fetch date value
-6. To Checklist 
-7. To do Tags
-8. TO do priority
-9. Make todo object and push it to todos array
-10. 
+1. Make to do object
+2. Implement every button logic
+
+    1. cancel button
+        1. if not empty = data is stored to a todo object
+            1. hide to do box
+            2. show lists of todos + add task bar
+    2. confirm button
+
+        1. Check selected object is from list
+        2. Check every field is selected
+
+            1. If not new
+                1. save all changes to current object
+                2. hide todo box
+                3. show lists of todos + add task bar
+            2. If new
+
+                1. create an object and assign following data to a new todo object
+
+                    1. checkbox
+                    2. to do title
+                    3. notes
+                    4. due date
+                    5. tags
+                    6. priority level
+                    7. check list
+                        1. check if check list is empty
+
+                2. Specify the object by assigning unique value
+                3. Push the object to todos array
+
+3. To Checklist
+4. To do Tags
+5. TO do priority
+6. Refactor
