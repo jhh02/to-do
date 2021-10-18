@@ -33,4 +33,17 @@
 3. To Checklist
 4. To do Tags
 5. TO do priority
-6. Refactor
+6. Create project object
+7. Due date arrow logic
+8. Refactor
+
+### New Feature Idea
+
+[ ] Weather API
+[ ]
+
+### CSS
+
+[ ] Add a random quote below current time on user page
+[ ] Apply slide effect to clock when user logs in for the first time
+[ ]

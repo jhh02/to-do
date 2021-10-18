@@ -97,7 +97,7 @@ input[type='text'] {
 .hidden-content {
     display: none;
 }
-.heading {
+.headingTitle {
     @apply flex w-3/5 justify-between;
 }
 
@@ -128,7 +128,7 @@ input[type='text'] {
     width: 80%;
 }
 
-.btnContainer {
+.buttonsWrapper {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;

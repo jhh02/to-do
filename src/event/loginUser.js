@@ -1,18 +1,35 @@
-import { createElement, appendChild } from '../DOM/functions';
+import {
+    createElement,
+    appendChild,
+    addClassNames,
+    removeClassNames,
+    querySelector,
+    querySelectorAll,
+} from '../DOM/functions';
+import {
+    dateNow,
+    getYear,
+    getMonth,
+    getDay,
+    today,
+    getHours,
+    getMinutes,
+    getSeconds,
+} from '../DOM/objects';
 
 export default function userLogin() {
-    const sections = document.querySelectorAll('.main');
-    const userNameInput = document.querySelector('.userName');
-    const userLoginContainer = document.querySelector('.userLogin');
-    const welcomeUser = document.querySelector('.welcomeUser');
-    const userNameNav = document.querySelector('.user-text');
-    const navBar = document.querySelector('.navbar');
-    const userNav = document.querySelector('.user-list');
+    const sections = querySelector('.main').el;
+    const userNameInput = querySelector('.userName').el;
+    const userLoginContainer = querySelector('.userLogin').el;
+    const welcomeUser = querySelector('.welcomeUser').el;
+    const userNameNav = querySelector('.user-text').el;
+    const navBar = querySelector('.navbar').el;
+    const userNav = querySelector('.user-list').el;
 
     // When user button is clicked
     userNav.addEventListener('click', (e) => {
         Array.from(sections).forEach((element) => {
-            element.classList.add('hidden-content');
+            addClassNames(element, 'hidden-content');
         });
     });
 
@@ -24,23 +41,21 @@ export default function userLogin() {
             const userName = keyButton.target.value;
             keyButton.target.value = '';
             localStorage.setItem('userName', userName);
-            userLoginContainer.classList.add('hidden');
+            addClassNames(userLoginContainer, 'hidden');
             // 1. Welcome User
-            const welcomeMessage = createElement('h1', 'welcomeMessage');
+            const welcomeMessage = createElement('h1', '', 'welcomeMessage');
             welcomeMessage.el.textContent = `Welcome ${userName}`;
-            welcomeUser.classList.remove('hidden');
-            const clock = createElement('span', 'clock');
+            removeClassNames(welcomeUser, 'hidden');
+            const clock = createElement('span', '', 'clock');
             appendChild(welcomeUser, welcomeMessage.el, clock.el);
 
             // 2. Show live clock
             setInterval(() => {
-                const date = new Date();
-                const hours = date.getHours();
-                const minutes = date.getMinutes();
-                const seconds = date.getSeconds();
-                clock.el.textContent = `${hours < 10 ? `0${hours}` : hours}: ${
-                    minutes < 10 ? `0${minutes}` : minutes
-                } : ${seconds < 10 ? `0${seconds}` : seconds} `;
+                clock.el.textContent = `${
+                    getHours < 10 ? `0${getHours}` : getHours
+                }: ${getMinutes < 10 ? `0${getMinutes}` : getMinutes} : ${
+                    getSeconds < 10 ? `0${getSeconds}` : getSeconds
+                } `;
             }, 1000);
             // 4. Print User name on logo bar
             userNameNav.textContent = userName;
@@ -54,21 +69,22 @@ export default function userLogin() {
     } else {
         // User signed in
         userLoginContainer.style.display = 'none';
-        welcomeUser.classList.remove('hidden');
+        removeClassNames(welcomeUser, 'hidden');
         const user = localStorage.getItem('userName');
-        const welcomeMessage = createElement('div', 'welcomeMessage');
-        welcomeMessage.el.textContent = `Welcome ${user}`;
-        const clock = createElement('span', 'clock');
+        const welcomeMessage = createElement(
+            'div',
+            `Welcome ${user}`,
+            'welcomeMessage'
+        );
+        const clock = createElement('span', '', 'clock');
         appendChild(welcomeUser, welcomeMessage.el, clock.el);
 
         setInterval(() => {
-            const date = new Date();
-            const hours = date.getHours();
-            const minutes = date.getMinutes();
-            const seconds = date.getSeconds();
-            clock.el.textContent = `${hours < 10 ? `0${hours}` : hours}: ${
-                minutes < 10 ? `0${minutes}` : minutes
-            } : ${seconds < 10 ? `0${seconds}` : seconds} `;
+            clock.el.textContent = `${
+                getHours < 10 ? `0${getHours}` : getHours
+            }: ${getMinutes < 10 ? `0${getMinutes}` : getMinutes} : ${
+                getSeconds < 10 ? `0${getSeconds}` : getSeconds
+            } `;
         }, 1000);
         // 4. Print User name on logo bar
         userNameNav.textContent = user;

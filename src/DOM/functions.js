@@ -1,34 +1,45 @@
-function createElement(text, class1 = '', class2 = '', class3 = '') {
-    const className = [];
+function createElement(text, textContent = '', ...classNames) {
+    const classes = [];
     const el = document.createElement(text);
-    if (class1) {
-        el.classList.add(class1);
-        className.push(class1);
-    }
-    if (class2) {
-        el.classList.add(class2);
-        className.push(class2);
-    }
-    if (class3) {
-        el.classList.add(class3);
-        className.push(class3);
-    }
-    return { el, className };
+    el.textContent = textContent;
+    classNames.forEach((clname) => el.classList.add(clname));
+    return { el, classes };
 }
 
-function appendChild(parent, child1, child2, child3, child4) {
-    parent.appendChild(child1);
-    if (child2) {
-        parent.appendChild(child2);
-    }
-    if (child3) {
-        parent.appendChild(child3);
-    }
-    if (child4) {
-        parent.appendChild(child4);
-    }
-
-    return { parent };
+function appendChild(parent, ...children) {
+    children.forEach((child) => parent.appendChild(child));
 }
 
-export { createElement, appendChild };
+function lineThrough(el, color, lineValue, pointerValue) {
+    el.style.color = color;
+    el.style.textDecoration = lineValue;
+    el.style.pointerEvents = pointerValue;
+}
+
+function removeClassNames(el, ...classNames) {
+    classNames.forEach((className) => el.classList.remove(className));
+}
+
+function addClassNames(el, ...classNames) {
+    classNames.forEach((className) => el.classList.add(className));
+}
+
+function querySelector(selector) {
+    const el = document.querySelector(selector);
+    return { el };
+}
+
+function querySelectorAll(selector) {
+    const el = Array.from(document.querySelectorAll(selector));
+    return { el };
+}
+
+export {
+    querySelectorAll,
+    querySelector,
+    createElement,
+    appendChild,
+    lineThrough,
+    addClassNames,
+    removeClassNames,
+};

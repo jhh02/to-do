@@ -1,24 +1,32 @@
-function createNavigationEvent() {
-    const navigationItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('.main');
-    const userMessages = document.querySelector('.welcomeUser');
-    const userNav = document.querySelector('.user');
+import {
+    querySelectorAll,
+    querySelector,
+    removeClassNames,
+    addClassNames,
+} from '../DOM/functions';
 
-    userNav.addEventListener('click', (e) => {
-        if (userMessages.classList.contains('clicked'))
-            userMessages.classList.remove('clicked');
+function createNavigationEvent() {
+    const navigationItems = querySelectorAll('.nav-item');
+    const sections = querySelectorAll('.main');
+    const userMessages = querySelector('.welcomeUser');
+    const userNav = querySelector('.user');
+
+    userNav.el.addEventListener('click', (e) => {
+        if (userMessages.el.classList.contains('clicked'))
+            addClassNames(userMessages.el, 'clicked');
     });
-    navigationItems.forEach((item) => {
+    console.log(navigationItems.el);
+    navigationItems.el.forEach((item) => {
         item.addEventListener('click', (e) => {
-            userMessages.classList.add('clicked');
-            sections.forEach((content) => {
+            addClassNames(userMessages.el, 'clicked');
+            sections.el.forEach((content) => {
                 if (
                     content.classList[0] ===
                     `${e.target.ownerDocument.activeElement.classList[1]}-content`
                 ) {
-                    content.classList.remove('hidden-content');
+                    removeClassNames(content, 'hidden-content');
                 } else {
-                    content.classList.add('hidden-content');
+                    addClassNames(content, 'hidden-content');
                 }
             });
         });
