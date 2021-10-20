@@ -6,6 +6,8 @@ import {
     querySelector,
 } from '../DOM/functions';
 
+// TODO refactor
+
 export default function userLogin() {
     const sections = querySelector('.main').el;
     const userNameInput = querySelector('.userName').el;

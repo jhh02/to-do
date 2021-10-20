@@ -8,7 +8,7 @@ import {
 } from '../DOM/functions';
 import createListItems from './createListItems';
 
-// ! Refactor
+// TODO refactor
 
 export default function handleCheckList(e, todo) {
     const listItems = createListItems();

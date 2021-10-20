@@ -9,6 +9,7 @@ export default function handleTitle(e, todo) {
         const toDoHeadginValue = createElement('span', '', 'toDoTitleValue');
         const headingValue = e.target.value;
         e.target.value = '';
+
         // * Todo title double click event handler
         toDoHeadginValue.el.addEventListener('dblclick', (dbclickEvent) => {
             dbclickEvent.target.nextSibling.value = headingValue;

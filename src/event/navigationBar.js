@@ -5,6 +5,8 @@ import {
     addClassNames,
 } from '../DOM/functions';
 
+// TODO refactor
+
 function createNavigationEvent() {
     const navigationItems = querySelectorAll('.nav-item');
     const sections = querySelectorAll('.main');

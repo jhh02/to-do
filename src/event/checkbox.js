@@ -15,6 +15,7 @@ export default function handleCheckBox(e, todo) {
         drawLineThroughDefault(toDoHeading);
         drawLineThroughDefault(textArea);
 
+        // TODO refactor
         Array.from(checkList.children).forEach((el) => {
             if (el.classList.contains('checkBoxChecklist')) {
                 Array.from(el.children).forEach((li) => {

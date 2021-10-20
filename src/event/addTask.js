@@ -1,6 +1,6 @@
 import { addClassNames, querySelectorAll, appendChild } from '../DOM/functions';
-import createToDo from './createToDo';
 import addEventsToTodobox from './toDoBoxEvents';
+import createToDo from './createToDo';
 
 export default function clickAddTaskBtn() {
     const addToTaskBars = querySelectorAll('.addToTaskBar').el;

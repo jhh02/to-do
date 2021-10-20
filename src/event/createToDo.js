@@ -15,9 +15,7 @@ export default function createToDoBox() {
     const priorityButton = createElement('div', '🚩', 'priorityButton');
     const confirmButton = createElement('button', '✅', 'confirmButton');
     const cancelButton = createElement('button', '❌', 'cancelButton');
-
     const tagList = createElement('datalist');
-    tagList.el.setAttribute('id', 'tagList');
 
     dateButton.el.type = 'date';
     dateButton.el.value = new Date();
@@ -28,6 +26,7 @@ export default function createToDoBox() {
     tagInput.el.placeholder = 'tags';
     tagInput.el.setAttribute('list', 'tagList');
     tagInput.el.setAttribute('id', 'tagList');
+    tagList.el.setAttribute('id', 'tagList');
 
     appendChild(titleWrapper.el, checkbox.el, title.el);
     appendChild(

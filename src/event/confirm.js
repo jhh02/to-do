@@ -8,29 +8,21 @@ import { todos } from '../DOM/objects';
 
 export default function handleConfirm(e, todoObj) {
     //* Confirm event handlers
-    // check if title is empty
-    // check if date is empty
-    // check if priority is selected
+    // TODO Set required property to title, date, and priority later before completion.
     todos.push(todoObj);
 
     // 1. Make todo list
     const todo = createElement('li', '', 'todolist');
-    todo.el.setAttribute('id', todoObj.id);
     const titleWrapper = createElement('div', '', 'titleWrapper');
     const checkbox = createElement('input', '', 'checkbox');
-    checkbox.el.type = 'checkbox';
     const title = createElement('div', todoObj.title, 'title');
     const buttonWrapper = createElement('div', '', 'buttonWrapper');
     const dueDate = createElement('div', todoObj.dueDate, 'dueDate');
     const priority = createElement('div', todoObj.priority, 'priority');
     const editButton = createElement('button', 'edit', 'editButton');
     const deleteButton = createElement('button', 'delete', 'deleteButton');
-
-    // Event handler button
-    // Checkbox
-    // Click on list itself
-    // edit buttonWrapper
-    // delete button
+    todo.el.setAttribute('id', todoObj.id);
+    checkbox.el.type = 'checkbox';
 
     appendChild(titleWrapper.el, checkbox.el, title.el);
     appendChild(
@@ -41,13 +33,13 @@ export default function handleConfirm(e, todoObj) {
         dueDate.el
     );
     appendChild(todo.el, titleWrapper.el, buttonWrapper.el);
+
     removeClassNames(
         e.target.parentElement.parentElement.parentElement.children[1],
         'hidden'
     );
-    Array.from(
-        e.target.parentElement.parentElement.parentElement.children
-    )[1].insertBefore(
+
+    e.target.parentElement.parentElement.parentElement.children[1].insertBefore(
         todo.el,
         e.target.parentElement.parentElement.parentElement.children[1].lastChild
             .previousSibling
@@ -56,12 +48,16 @@ export default function handleConfirm(e, todoObj) {
     addClassNames(e.target.parentElement.parentElement, 'hidden');
     // 4. show tasks -> UL
 
-    //* Create a new list for todoObject
-    // create another container
-    // create button for details
-    // create span to show date date
-    // create button to edit
-    // create button for delete
-    // if user clicks the list, it shows the detail of todo obj, press esc to exi
-    // insert list before add task bar
+    // Event handler button
+
+    // ?Checkbox
+    // make line through
+    // ?Click on list itself
+    // view detail - modal, show todobox, background is blur.
+    // when clicked background or outside modal, close modal and show todo lists
+    // ?edit buttonWrapper
+    // show
+    // ?delete button
+    // remove todo list from display and remove it from todos array
+    // find same object with todo obj id
 }
