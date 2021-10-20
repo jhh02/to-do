@@ -1,3 +1,9 @@
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 function createElement(text, textContent = '', ...classNames) {
     const classes = [];
     const el = document.createElement(text);
@@ -8,6 +14,18 @@ function createElement(text, textContent = '', ...classNames) {
 
 function appendChild(parent, ...children) {
     children.forEach((child) => parent.appendChild(child));
+}
+
+function drawLineThroughDefault(el) {
+    el.style.color = 'grey';
+    el.style.textDecoration = 'line-through';
+    el.style.pointerEvents = 'none';
+}
+
+function unDrawLineThroughDefault(el) {
+    el.style.color = 'black';
+    el.style.textDecoration = 'none';
+    el.style.pointerEvents = 'auto';
 }
 
 function lineThrough(el, color, lineValue, pointerValue) {
@@ -34,12 +52,20 @@ function querySelectorAll(selector) {
     return { el };
 }
 
+function showEventTarget(el, event) {
+    el.addEventListener(event, (e) => console.log(e.target));
+}
+
 export {
+    showEventTarget,
     querySelectorAll,
     querySelector,
     createElement,
     appendChild,
     lineThrough,
+    drawLineThroughDefault,
+    unDrawLineThroughDefault,
     addClassNames,
     removeClassNames,
+    removeAllChildNodes,
 };

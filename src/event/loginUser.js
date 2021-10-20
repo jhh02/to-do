@@ -4,18 +4,7 @@ import {
     addClassNames,
     removeClassNames,
     querySelector,
-    querySelectorAll,
 } from '../DOM/functions';
-import {
-    dateNow,
-    getYear,
-    getMonth,
-    getDay,
-    today,
-    getHours,
-    getMinutes,
-    getSeconds,
-} from '../DOM/objects';
 
 export default function userLogin() {
     const sections = querySelector('.main').el;
@@ -52,9 +41,17 @@ export default function userLogin() {
             // 2. Show live clock
             setInterval(() => {
                 clock.el.textContent = `${
-                    getHours < 10 ? `0${getHours}` : getHours
-                }: ${getMinutes < 10 ? `0${getMinutes}` : getMinutes} : ${
-                    getSeconds < 10 ? `0${getSeconds}` : getSeconds
+                    new Date().getHours() < 10
+                        ? `0${new Date().getHours()}`
+                        : new Date().getHours()
+                }: ${
+                    new Date().getMinutes() < 10
+                        ? `0${new Date().getMinutes()}`
+                        : new Date().getMinutes()
+                } : ${
+                    new Date().getSeconds() < 10
+                        ? `0${new Date().getSeconds()}`
+                        : new Date().getSeconds()
                 } `;
             }, 1000);
             // 4. Print User name on logo bar
@@ -81,9 +78,17 @@ export default function userLogin() {
 
         setInterval(() => {
             clock.el.textContent = `${
-                getHours < 10 ? `0${getHours}` : getHours
-            }: ${getMinutes < 10 ? `0${getMinutes}` : getMinutes} : ${
-                getSeconds < 10 ? `0${getSeconds}` : getSeconds
+                new Date().getHours() < 10
+                    ? `0${new Date().getHours()}`
+                    : new Date().getHours()
+            }: ${
+                new Date().getMinutes() < 10
+                    ? `0${new Date().getMinutes()}`
+                    : new Date().getMinutes()
+            } : ${
+                new Date().getSeconds() < 10
+                    ? `0${new Date().getSeconds()}`
+                    : new Date().getSeconds()
             } `;
         }, 1000);
         // 4. Print User name on logo bar

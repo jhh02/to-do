@@ -13,9 +13,13 @@ function createNavigationEvent() {
 
     userNav.el.addEventListener('click', (e) => {
         if (userMessages.el.classList.contains('clicked'))
-            addClassNames(userMessages.el, 'clicked');
+            removeClassNames(userMessages.el, 'clicked');
+
+        sections.el.forEach((item) => {
+            addClassNames(item, 'hidden-content');
+        });
     });
-    console.log(navigationItems.el);
+
     navigationItems.el.forEach((item) => {
         item.addEventListener('click', (e) => {
             addClassNames(userMessages.el, 'clicked');
