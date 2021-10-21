@@ -1,4 +1,4 @@
-import { removeClassNames } from '../DOM/functions';
+import { removeClassNames } from './functions';
 
 export default function handleCancel(e, todoBox, addToTaskBars, todo) {
     if (todo.title || todo.notes || todo.dueDate || todo.checklists) {

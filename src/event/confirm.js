@@ -5,21 +5,19 @@ import {
     createElement,
     addClassNames,
     removeClassNames,
-    removeAllChildNodes,
-} from '../DOM/functions';
-
-import Todo from '../DOM/objects';
-import createToDoList from './toDoListBar';
+} from './functions';
+import Todo from '../DOM/toDoObject';
+import createToDoList from '../DOM/toDoTaskBar';
+import toggleHoverCard from './toggleHover';
 
 export default function handleConfirm(e, todoObj, todoBox) {
     //* Confirm event handlers
-    const [, listContainer] = todoBox.parentElement.children;
-    addClassNames(todoBox, 'hidden');
     Todo.todos.push(todoObj);
+    addClassNames(todoBox, 'hidden');
+    const [, listContainer] = todoBox.parentElement.children;
     const toDoList = createToDoList(todoObj, listContainer);
 
     // TODO Set required property to title, date, and priority later before completion.
-
     // Event handler button
     toDoList.checkbox.el.addEventListener('change', (checkboxE) => {
         const checkedOn = checkboxE.target.checked;
@@ -33,6 +31,7 @@ export default function handleConfirm(e, todoObj, todoBox) {
     });
 
     // TODO:Style with tailwind
+    // TODO: view detail - modal, show todobox, background is blur.
     const modalBox = createElement('div', '', 'modal', 'hidden');
     const modalContent = createElement('div', '', 'modal-content');
     const notes = createElement('div', `Note: ${todoObj.notes}`, 'notes');
@@ -46,30 +45,19 @@ export default function handleConfirm(e, todoObj, todoBox) {
     appendChild(modalBox.el, modalContent.el);
     toDoList.todo.el.insertBefore(modalBox.el, toDoList.buttonWrapper.el);
 
-    // // ?Show brief detail when the list is on hover
-    if (todoObj.notes || todoObj.subLists || todoObj.tags) {
-        toDoList.titleWrapper.el.addEventListener('mouseover', (event) => {
-            removeClassNames(modalBox.el, 'hidden');
-        });
-
-        toDoList.titleWrapper.el.addEventListener('mouseout', (event) => {
-            addClassNames(modalBox.el, 'hidden');
-            // close modal box
-        });
-    }
-
-    // TODO: view detail - modal, show todobox, background is blur.
+    if (todoObj.notes || todoObj.subLists || todoObj.tags)
+        toggleHoverCard(toDoList.titleWrapper.el, modalBox.el);
 
     // delete
-    toDoList.buttonWrapper.el.addEventListener('click', (eventBtn) => {
+    toDoList.buttonWrapper.el.addEventListener('click', () => {
         Todo.todos = Todo.todos.filter(
             (list) => list.id !== toDoList.todo.el.id
         );
-        Todo.removeTodo();
         toDoList.todo.el.remove();
+        Todo.removeTodo();
     });
     //  edit
-    toDoList.title.el.addEventListener('click', (deleteEvent) => {
+    toDoList.title.el.addEventListener('click', () => {
         addClassNames(listContainer, 'hidden');
         removeClassNames(todoBox, 'hidden');
         Todo.todos = Todo.todos.filter(

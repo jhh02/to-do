@@ -3,7 +3,7 @@ import {
     querySelector,
     removeClassNames,
     addClassNames,
-} from '../DOM/functions';
+} from './functions';
 
 // TODO refactor
 
@@ -13,7 +13,7 @@ function createNavigationEvent() {
     const userMessages = querySelector('.welcomeUser');
     const userNav = querySelector('.user');
 
-    userNav.el.addEventListener('click', (e) => {
+    userNav.el.addEventListener('click', () => {
         if (userMessages.el.classList.contains('clicked'))
             removeClassNames(userMessages.el, 'clicked');
 

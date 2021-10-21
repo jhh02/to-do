@@ -2,21 +2,20 @@ import {
     drawLineThroughDefault,
     unDrawLineThroughDefault,
     lineThrough,
-} from '../DOM/functions';
+} from './functions';
 
 // * To do checkbox handler
 export default function handleCheckBox(e, todo) {
-    const checkedOn = e.target.checked;
-    const toDoHeading = e.target.nextSibling;
-    const textArea = e.target.parentElement.nextSibling;
-    const checkList = e.target.parentElement;
+    const finished = e.target.checked;
+    const title = e.target.nextSibling;
+    const notes = e.target.parentElement.nextSibling;
+    const subList = e.target.parentElement;
 
-    if (checkedOn) {
-        drawLineThroughDefault(toDoHeading);
-        drawLineThroughDefault(textArea);
-
+    if (finished) {
+        drawLineThroughDefault(title);
+        drawLineThroughDefault(notes);
         // TODO refactor
-        Array.from(checkList.children).forEach((el) => {
+        Array.from(subList.children).forEach((el) => {
             if (el.classList.contains('checkBoxChecklist')) {
                 Array.from(el.children).forEach((li) => {
                     Array.from(li.children).forEach((span) => {
@@ -31,10 +30,10 @@ export default function handleCheckBox(e, todo) {
             }
         });
     } else {
-        unDrawLineThroughDefault(toDoHeading);
-        unDrawLineThroughDefault(textArea);
+        unDrawLineThroughDefault(title);
+        unDrawLineThroughDefault(notes);
 
-        Array.from(checkList.children).forEach((el) => {
+        Array.from(subList.children).forEach((el) => {
             if (el.classList.contains('checkBoxChecklist')) {
                 Array.from(el.children).forEach((li) => {
                     console.log(li);
@@ -50,5 +49,5 @@ export default function handleCheckBox(e, todo) {
             }
         });
     }
-    todo.checkbox = checkedOn;
+    todo.checkbox = finished;
 }

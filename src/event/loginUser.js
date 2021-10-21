@@ -4,7 +4,7 @@ import {
     addClassNames,
     removeClassNames,
     querySelector,
-} from '../DOM/functions';
+} from './functions';
 
 // TODO refactor
 
@@ -18,7 +18,7 @@ export default function userLogin() {
     const userNav = querySelector('.user-list').el;
 
     // When user button is clicked
-    userNav.addEventListener('click', (e) => {
+    userNav.addEventListener('click', () => {
         Array.from(sections).forEach((element) => {
             addClassNames(element, 'hidden-content');
         });
