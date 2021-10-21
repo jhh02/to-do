@@ -1,63 +1,80 @@
 import {
+    drawLineThroughDefault,
+    unDrawLineThroughDefault,
     appendChild,
     createElement,
     addClassNames,
     removeClassNames,
+    removeAllChildNodes,
 } from '../DOM/functions';
-import { todos } from '../DOM/objects';
 
-export default function handleConfirm(e, todoObj) {
+import Todo from '../DOM/objects';
+import createToDoList from './toDoListBar';
+
+export default function handleConfirm(e, todoObj, todoBox) {
     //* Confirm event handlers
+    const [, listContainer] = todoBox.parentElement.children;
+    addClassNames(todoBox, 'hidden');
+    Todo.todos.push(todoObj);
+    const toDoList = createToDoList(todoObj, listContainer);
+
     // TODO Set required property to title, date, and priority later before completion.
-    todos.push(todoObj);
-
-    // 1. Make todo list
-    const todo = createElement('li', '', 'todolist');
-    const titleWrapper = createElement('div', '', 'titleWrapper');
-    const checkbox = createElement('input', '', 'checkbox');
-    const title = createElement('div', todoObj.title, 'title');
-    const buttonWrapper = createElement('div', '', 'buttonWrapper');
-    const dueDate = createElement('div', todoObj.dueDate, 'dueDate');
-    const priority = createElement('div', todoObj.priority, 'priority');
-    const editButton = createElement('button', 'edit', 'editButton');
-    const deleteButton = createElement('button', 'delete', 'deleteButton');
-    todo.el.setAttribute('id', todoObj.id);
-    checkbox.el.type = 'checkbox';
-
-    appendChild(titleWrapper.el, checkbox.el, title.el);
-    appendChild(
-        buttonWrapper.el,
-        editButton.el,
-        deleteButton.el,
-        priority.el,
-        dueDate.el
-    );
-    appendChild(todo.el, titleWrapper.el, buttonWrapper.el);
-
-    removeClassNames(
-        e.target.parentElement.parentElement.parentElement.children[1],
-        'hidden'
-    );
-
-    e.target.parentElement.parentElement.parentElement.children[1].insertBefore(
-        todo.el,
-        e.target.parentElement.parentElement.parentElement.children[1].lastChild
-            .previousSibling
-    );
-    // 3. Hide todobox -> DIV
-    addClassNames(e.target.parentElement.parentElement, 'hidden');
-    // 4. show tasks -> UL
 
     // Event handler button
+    toDoList.checkbox.el.addEventListener('change', (checkboxE) => {
+        const checkedOn = checkboxE.target.checked;
+        if (checkedOn) {
+            drawLineThroughDefault(toDoList.title.el);
+            drawLineThroughDefault(toDoList.buttonWrapper.el);
+        } else {
+            unDrawLineThroughDefault(toDoList.title.el);
+            unDrawLineThroughDefault(toDoList.buttonWrapper.el);
+        }
+    });
 
-    // ?Checkbox
-    // make line through
-    // ?Click on list itself
-    // view detail - modal, show todobox, background is blur.
-    // when clicked background or outside modal, close modal and show todo lists
-    // ?edit buttonWrapper
-    // show
-    // ?delete button
-    // remove todo list from display and remove it from todos array
-    // find same object with todo obj id
+    // TODO:Style with tailwind
+    const modalBox = createElement('div', '', 'modal', 'hidden');
+    const modalContent = createElement('div', '', 'modal-content');
+    const notes = createElement('div', `Note: ${todoObj.notes}`, 'notes');
+    const subLists = createElement(
+        'div',
+        `List: ${todoObj.subLists}`,
+        'subLists'
+    );
+    const tags = createElement('div', `Tags: ${todoObj.tags}`, 'tags');
+    appendChild(modalContent.el, notes.el, subLists.el, tags.el);
+    appendChild(modalBox.el, modalContent.el);
+    toDoList.todo.el.insertBefore(modalBox.el, toDoList.buttonWrapper.el);
+
+    // // ?Show brief detail when the list is on hover
+    if (todoObj.notes || todoObj.subLists || todoObj.tags) {
+        toDoList.titleWrapper.el.addEventListener('mouseover', (event) => {
+            removeClassNames(modalBox.el, 'hidden');
+        });
+
+        toDoList.titleWrapper.el.addEventListener('mouseout', (event) => {
+            addClassNames(modalBox.el, 'hidden');
+            // close modal box
+        });
+    }
+
+    // TODO: view detail - modal, show todobox, background is blur.
+
+    // delete
+    toDoList.buttonWrapper.el.addEventListener('click', (eventBtn) => {
+        Todo.todos = Todo.todos.filter(
+            (list) => list.id !== toDoList.todo.el.id
+        );
+        Todo.removeTodo();
+        toDoList.todo.el.remove();
+    });
+    //  edit
+    toDoList.title.el.addEventListener('click', (deleteEvent) => {
+        addClassNames(listContainer, 'hidden');
+        removeClassNames(todoBox, 'hidden');
+        Todo.todos = Todo.todos.filter(
+            (list) => list.id !== toDoList.todo.el.id
+        );
+        toDoList.todo.el.remove();
+    });
 }
