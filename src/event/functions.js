@@ -52,7 +52,15 @@ function querySelectorAll(selector) {
     return { el };
 }
 
+function saveNewToDos(todoObject, task) {
+    todoObject.todos = todoObject.todos.filter(
+        (list) => list.id !== task.todo.el.id
+    );
+    task.todo.el.remove();
+}
+
 export {
+    saveNewToDos,
     querySelectorAll,
     querySelector,
     createElement,

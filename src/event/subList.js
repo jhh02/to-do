@@ -23,7 +23,6 @@ export default function handleCheckList(e, todo, notes) {
 
     function handleDelete(trashEvent, todoObj) {
         const allSubLists = todoObj.getSubLists();
-
         const newSubLists = allSubLists.filter(
             (list) =>
                 list.replaceAll(' ', '').toLowerCase() !==

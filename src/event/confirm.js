@@ -1,27 +1,40 @@
 import {
     drawLineThroughDefault,
     unDrawLineThroughDefault,
-    appendChild,
-    createElement,
     addClassNames,
     removeClassNames,
+    saveNewToDos,
 } from './functions';
 import Todo from '../DOM/toDoObject';
-import createToDoList from '../DOM/toDoTaskBar';
 import toggleHoverCard from './toggleHover';
+import makeHoverCardBox from '../DOM/hoverCardBox';
 
-export default function handleConfirm(e, todoObj, todoBox) {
-    //* Confirm event handlers
+export default function handleConfirm(
+    e,
+    todoObj,
+    todoBox,
+    listContainer,
+    toDoList
+) {
     Todo.todos.push(todoObj);
-    addClassNames(todoBox, 'hidden');
-    const [, listContainer] = todoBox.parentElement.children;
-    const toDoList = createToDoList(todoObj, listContainer);
+    toDoList.todo.el.dataset.date = todoObj.dueDate;
+    toDoList.title.el.textContent = todoObj.title;
+    toDoList.dueDate.el.textContent = todoObj.dueDate;
+    toDoList.priority.el.textContent = todoObj.priority;
+    toDoList.todo.el.setAttribute('id', todoObj.id);
+    todoBox.id = todoObj.id;
+    todoBox.dataset.date = todoObj.dueDate;
 
+    listContainer.insertBefore(
+        toDoList.todo.el,
+        listContainer.lastElementChild
+    );
+    removeClassNames(listContainer, 'hidden');
+    addClassNames(todoBox, 'hidden');
     // TODO Set required property to title, date, and priority later before completion.
     // Event handler button
     toDoList.checkbox.el.addEventListener('change', (checkboxE) => {
-        const checkedOn = checkboxE.target.checked;
-        if (checkedOn) {
+        if (checkboxE.target.checked) {
             drawLineThroughDefault(toDoList.title.el);
             drawLineThroughDefault(toDoList.buttonWrapper.el);
         } else {
@@ -30,39 +43,31 @@ export default function handleConfirm(e, todoObj, todoBox) {
         }
     });
 
+    if (
+        toDoList.todo.el.firstElementChild.nextSibling.classList.contains(
+            'modal'
+        )
+    ) {
+        toDoList.todo.el.firstElementChild.nextSibling.remove();
+    }
+
     // TODO:Style with tailwind
     // TODO: view detail - modal, show todobox, background is blur.
-    const modalBox = createElement('div', '', 'modal', 'hidden');
-    const modalContent = createElement('div', '', 'modal-content');
-    const notes = createElement('div', `Note: ${todoObj.notes}`, 'notes');
-    const subLists = createElement(
-        'div',
-        `List: ${todoObj.subLists}`,
-        'subLists'
-    );
-    const tags = createElement('div', `Tags: ${todoObj.tags}`, 'tags');
-    appendChild(modalContent.el, notes.el, subLists.el, tags.el);
-    appendChild(modalBox.el, modalContent.el);
-    toDoList.todo.el.insertBefore(modalBox.el, toDoList.buttonWrapper.el);
+
+    const hoverBox = makeHoverCardBox(todoObj, toDoList);
 
     if (todoObj.notes || todoObj.subLists || todoObj.tags)
-        toggleHoverCard(toDoList.titleWrapper.el, modalBox.el);
+        toggleHoverCard(toDoList.titleWrapper.el, hoverBox.modalBox.el);
 
     // delete
     toDoList.buttonWrapper.el.addEventListener('click', () => {
-        Todo.todos = Todo.todos.filter(
-            (list) => list.id !== toDoList.todo.el.id
-        );
-        toDoList.todo.el.remove();
+        saveNewToDos(Todo, toDoList);
         Todo.removeTodo();
     });
     //  edit
     toDoList.title.el.addEventListener('click', () => {
         addClassNames(listContainer, 'hidden');
         removeClassNames(todoBox, 'hidden');
-        Todo.todos = Todo.todos.filter(
-            (list) => list.id !== toDoList.todo.el.id
-        );
-        toDoList.todo.el.remove();
+        saveNewToDos(Todo, toDoList);
     });
 }

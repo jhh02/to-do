@@ -1,13 +1,28 @@
-import { removeClassNames } from './functions';
+import { saveNewToDos, addClassNames, removeClassNames } from './functions';
+import Todo from '../DOM/toDoObject';
 
-export default function handleCancel(e, todoBox, addToTaskBars, todo) {
-    if (todo.title || todo.notes || todo.dueDate || todo.checklists) {
-        // ! Not empty but newly created
-        // ! Not empty and not newly created
-        // TODO: Identify todo box from todoObjectArray
-    } else {
-        // ! Empty and newly created
-        todoBox.remove();
-        addToTaskBars.forEach((taskBtn) => removeClassNames(taskBtn, 'hidden'));
+export default function handleCancel(
+    e,
+    todoObj,
+    todoBox,
+    listContainer,
+    toDoList
+) {
+    // Check if this is added to todos array
+    if (toDoList.todo.el.id) {
+        toDoList.title.el.textContent = todoObj.title;
+        toDoList.dueDate.el.textContent = todoObj.dueDate;
+        toDoList.priority.el.textContent = todoObj.priority;
+
+        listContainer.insertBefore(
+            toDoList.todo.el,
+            listContainer.lastElementChild
+        );
+
+        removeClassNames(listContainer, 'hidden');
+        addClassNames(todoBox, 'hidden');
     }
+
+    removeClassNames(listContainer, 'hidden');
+    addClassNames(todoBox, 'hidden');
 }

@@ -1,5 +1,6 @@
 import Todo from '../DOM/toDoObject';
 import createToDoForm from '../DOM/toDoBox';
+import createToDoList from '../DOM/toDoTaskBar';
 import handleCheckBox from './checkbox';
 import handleTextArera from './notes';
 import handleCheckList from './subList';
@@ -10,7 +11,7 @@ import handleTitle from './title';
 import handleDate from './date';
 import handleTag from './tag';
 
-export default function addEventsToDoForm(addTaskEvent, todoBox) {
+export default function addEventsToDoForm(addTaskEvent, todoBox, taskbars) {
     // * Create a new todo object
     const todo = new Todo();
 
@@ -26,7 +27,6 @@ export default function addEventsToDoForm(addTaskEvent, todoBox) {
     toDoForm.title.addEventListener('keypress', (titleEvent) =>
         handleTitle(titleEvent, todo, toDoForm.notes)
     );
-
     // * Note event
     toDoForm.notes.addEventListener('keypress', (noteEvent) =>
         handleTextArera(noteEvent, todo, toDoForm.dateButton)
@@ -52,14 +52,30 @@ export default function addEventsToDoForm(addTaskEvent, todoBox) {
         handlePriority(priorityEvent, todo)
     );
 
-    //* Confirm event
+    // * Create todo list
+    const toDoList = createToDoList(todo);
+
+    //* Confirm event\
     toDoForm.confirmButton.addEventListener('click', (confirmEvent) =>
-        handleConfirm(confirmEvent, todo, todoBox.list.el)
+        handleConfirm(
+            confirmEvent,
+            todo,
+            todoBox.list.el,
+            addTaskEvent.target.parentElement,
+            toDoList,
+            taskbars
+        )
     );
 
     //* Cancel event
     toDoForm.cancelButton.addEventListener('click', (cancelEvent) =>
-        handleCancel(cancelEvent, todoBox.list.el, addTaskEvent, todo)
+        handleCancel(
+            cancelEvent,
+            todo,
+            todoBox.list.el,
+            addTaskEvent.target.parentElement,
+            toDoList
+        )
     );
 
     //* Create a new list for todoObject

@@ -5,37 +5,45 @@ import {
     addClassNames,
 } from './functions';
 
+import showContent from './showContent';
 // TODO refactor
 
 function createNavigationEvent() {
     const navigationItems = querySelectorAll('.nav-item');
-    const sections = querySelectorAll('.main');
+    const section = querySelector('.main');
     const userMessages = querySelector('.welcomeUser');
     const userNav = querySelector('.user');
+    const heading = querySelector('.contentHeading');
+    const listContainer = querySelector('.toDoListContainer');
 
     userNav.el.addEventListener('click', () => {
         if (userMessages.el.classList.contains('clicked'))
             removeClassNames(userMessages.el, 'clicked');
-
-        sections.el.forEach((item) => {
-            addClassNames(item, 'hidden-content');
-        });
+        addClassNames(section.el, 'hidden-content');
     });
 
+    function handleNavs(e) {
+        addClassNames(userMessages.el, 'clicked');
+        removeClassNames(section.el, 'hidden-content');
+
+        const nav = e.target.classList[1];
+        switch (nav) {
+            case 'inbox':
+                showContent(heading, 'Inbox', listContainer);
+                break;
+            case 'today':
+                showContent(heading, 'Today', listContainer);
+                break;
+            case 'upcoming':
+                showContent(heading, 'Upcoming', listContainer);
+                break;
+            default:
+                break;
+        }
+    }
+
     navigationItems.el.forEach((item) => {
-        item.addEventListener('click', (e) => {
-            addClassNames(userMessages.el, 'clicked');
-            sections.el.forEach((content) => {
-                if (
-                    content.classList[0] ===
-                    `${e.target.ownerDocument.activeElement.classList[1]}-content`
-                ) {
-                    removeClassNames(content, 'hidden-content');
-                } else {
-                    addClassNames(content, 'hidden-content');
-                }
-            });
-        });
+        item.addEventListener('click', (e) => handleNavs(e));
     });
 }
 
